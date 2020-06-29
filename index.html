@@ -1,0 +1,69 @@
+<!--TEMPLATE mustache-->
+<!DOCTYPE html>
+<html class="ui-full" lang="en">
+<head>
+    <title>..</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="/ui/all.scss">
+    <link rel="stylesheet" href="/style.scss">
+
+    <link rel="icon" type="image/png" href="/fav/16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/fav/32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/fav/192.png" sizes="192x192" />
+
+</head>
+
+<body>
+
+{{! Init basic structure for startup styling and 'defer' }}
+<manage-app
+        ui-is-init
+         class="ui-app is-full"
+         api-base-href="/api">
+    <ui-drawer-layout>
+        <ui-drawer>
+            <ui-appbar class="has-spacing">
+                <ui-bar>
+                    <ui-icon>S</ui-icon>
+                </ui-bar>
+                <ui-bar class="is-grow is-end">
+                    <ui-icon-button>
+                        <ui-icon data-type="menu-close"></ui-icon>
+                        <ui-drawer-closer></ui-drawer-closer>
+                    </ui-icon-button>
+                </ui-bar>
+            </ui-appbar>
+        </ui-drawer>
+        <ui-drawer-main>
+            <ui-appbar class="has-spacing">
+                <ui-bar>
+
+                </ui-bar>
+                <ui-bar class="is-grow is-end">
+
+                </ui-bar>
+            </ui-appbar>
+            <ui-scrollable>
+                <ui-spinner class="is-init"></ui-spinner>
+
+            </ui-scrollable>
+        </ui-drawer-main>
+    </ui-drawer-layout>
+</manage-app>
+
+<script defer src="/ui/base/app.js"></script>
+<script defer src="/ui/base/button.js"></script>
+<script defer src="/ui/base/modal.js"></script>
+<script defer src="/ui/base/dialog.js"></script>
+<script defer src="/ui/base/bar.js"></script>
+<script defer src="/ui/base/spinner.js"></script>
+
+<script defer src="/ui/components/drawer.js"></script>
+<script defer src="/ui/components/tab.js"></script>
+
+</body>
+</html>
