@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html class="ui-full" lang="en">
 <head>
-    <title>..</title>
+    {{% import {Manage} from '🎛' }}
+    <title>{{Manage.name}}</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +16,6 @@
     <link rel="icon" type="image/png" href="/fav/16.png" sizes="16x16" />
     <link rel="icon" type="image/png" href="/fav/32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="/fav/192.png" sizes="192x192" />
-    {{% import {Manage} from '🎛' }}
 </head>
 
 <body>
@@ -43,15 +43,22 @@
         <ui-drawer-main>
             <ui-appbar class="has-spacing">
                 <ui-bar>
-
+                    <ui-icon-button>
+                        <ui-icon data-type="menu"></ui-icon>
+                        <ui-drawer-opener></ui-drawer-opener>
+                    </ui-icon-button>
                 </ui-bar>
                 <ui-bar class="is-grow is-end">
+                    <ui-icon-button class="is-rounded">
+                        <ui-icon><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></ui-icon>
 
+                        <!-- TODO menu according to mode -->
+                    </ui-icon-button>
                 </ui-bar>
             </ui-appbar>
             <ui-scrollable>
                 <ui-spinner class="is-init"></ui-spinner>
-
+                <div>content</div>
             </ui-scrollable>
         </ui-drawer-main>
     </ui-drawer-layout>
