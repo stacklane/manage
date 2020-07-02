@@ -37,7 +37,7 @@ class App extends HTMLElement {
         this._icons = _ICONS;
 
         const collectionsElement = this.querySelector('#collections');
-        this.modules().then((json)=>{
+        this.api.modules().then((json)=>{
             const modules = json.data;
             modules.forEach((module)=>{
                 module.collections.forEach((collection)=>{
