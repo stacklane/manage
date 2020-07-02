@@ -38,6 +38,9 @@
                     </ui-icon-button>
                 </ui-bar>
             </ui-appbar>
+            <div id="collections">
+
+            </div>
         </ui-drawer>
         <ui-drawer-main>
             <ui-appbar class="has-spacing">
@@ -46,7 +49,7 @@
                         <ui-icon data-type="menu"></ui-icon>
                         <ui-drawer-opener></ui-drawer-opener>
                     </ui-icon-button>
-                    <h5 class="is-medium-label">{{Manage.name}}</h5>
+                    <h5 class="is-small-label">{{Manage.name}}</h5>
                 </ui-bar>
                 <ui-bar class="is-grow is-end">
                     <ui-icon-button class="is-rounded">
@@ -73,6 +76,10 @@
 
 <script defer src="/ui/components/drawer.js"></script>
 <script defer src="/ui/components/tab.js"></script>
+
+<script defer src="/app/App.js"></script>
+
+<script defer src="/app/AppReady.js"></script>
 
 </body>
 </html>
