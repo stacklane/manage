@@ -43,7 +43,9 @@ class App extends HTMLElement {
                 module.collections.forEach((collection)=>{
                     const icon = new UIIcon(this.icons.byName(collection.icon.name));
                     const label = Elements.h4().classes('is-small-label').text(collection.plural).create();
-                    collectionsElement.appendChild(Elements.div().child(icon).child(label).create());
+                    const button = new UIButton(icon, label);
+                    // TODO button action
+                    collectionsElement.appendChild(button);
                 });
             });
         })
