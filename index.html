@@ -28,6 +28,7 @@
          api-base-href="/api">
     <ui-drawer-layout>
         <ui-drawer>
+            <ui-box class="is-gutter">
             <ui-appbar>
                 <ui-bar>
                     <ui-icon>{{{Manage.icon}}}</ui-icon>
@@ -39,27 +40,30 @@
                     </ui-icon-button>
                 </ui-bar>
             </ui-appbar>
+            </ui-box>
             <ui-box>
-                <ui-sidebar id="collections"></ui-sidebar>
+                <ui-sidebar id="collections" class="--ui-tab-is-pill-item"></ui-sidebar>
             </ui-box>
         </ui-drawer>
         <ui-drawer-main>
-            <ui-appbar>
-                <ui-bar>
-                    <ui-icon-button>
-                        <ui-icon data-type="menu"></ui-icon>
-                        <ui-drawer-opener></ui-drawer-opener>
-                    </ui-icon-button>
-                    <h5 class="is-small-label">{{Manage.name}}</h5>
-                </ui-bar>
-                <ui-bar class="is-grow is-end">
-                    <ui-icon-button class="is-rounded">
-                        <ui-icon><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></ui-icon>
+            <ui-box class="is-gutter">
+                <ui-appbar>
+                    <ui-bar>
+                        <ui-icon-button>
+                            <ui-icon data-type="menu"></ui-icon>
+                            <ui-drawer-opener></ui-drawer-opener>
+                        </ui-icon-button>
+                        <h5 class="is-small-label">{{Manage.name}}</h5>
+                    </ui-bar>
+                    <ui-bar class="is-grow is-end">
+                        <ui-icon-button class="is-rounded">
+                            <ui-icon><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></ui-icon>
 
-                        <!-- TODO menu according to mode -->
-                    </ui-icon-button>
-                </ui-bar>
-            </ui-appbar>
+                            <!-- TODO menu according to mode -->
+                        </ui-icon-button>
+                    </ui-bar>
+                </ui-appbar>
+            </ui-box>
             <ui-scrollable>
                 <ui-spinner class="is-init"></ui-spinner>
                 <div>content</div>
