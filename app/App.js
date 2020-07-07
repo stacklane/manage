@@ -44,7 +44,7 @@ class App extends HTMLElement {
                     const icon = new UIIcon(this.icons.byName(collection.icon.name));
                     const label = Elements.h4().classes('is-small-label').text(collection.plural).create();
                     const viewCreator = ()=>{};
-                    const tab = UITab.create([icon, label], viewCreator, collection.plural);
+                    const tab = new UITab(new UIBar([icon, label]), viewCreator, collection.plural);
                     collectionsElement.appendChild(tab);
                 });
             });
