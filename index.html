@@ -23,7 +23,7 @@
 
 {{! Init basic structure for startup styling and 'defer' }}
 <manage-app
-        ui-is-init
+        ui-spinner-is-active="true"
          class="ui-app is-full"
          api-base-href="/api">
     <ui-drawer-layout>
@@ -65,7 +65,7 @@
                 </ui-appbar>
             </ui-box>
             <ui-scrollable id="views">
-                <ui-spinner class="is-init"></ui-spinner>
+                <ui-spinner class="is-activated"></ui-spinner>
             </ui-scrollable>
         </ui-drawer-main>
     </ui-drawer-layout>

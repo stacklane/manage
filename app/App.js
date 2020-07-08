@@ -32,6 +32,10 @@ class App extends HTMLElement {
         return this._icons;
     }
 
+    set loading(v){
+        this.setAttribute('ui-spinner-is-active', v ? 'true' : 'false');
+    }
+
     ready(){
         this._api = new AppApi(this.getAttribute("api-base-href"));
         this._views = document.getElementById('views');
@@ -57,7 +61,7 @@ class App extends HTMLElement {
                 });
             });
         })
-        .then(()=>this.setAttribute('ui-spinner-is-active', 'false'));
+        .then(()=>this.loading=false);
     }
 }
 window.customElements.define('manage-app', App);
@@ -65,20 +69,31 @@ window.customElements.define('manage-app', App);
 class ListAllView extends HTMLElement{
     constructor(app, type) {
         super();
+        this._app = app;
         this._type = type;
         this._limit = 100;
         this._cursor = null;
-        this.appendChild(new UISpinner().activated());
     }
     connectedCallback(){
         this.refresh();
     }
     refresh(){
-        this.setAttribute('ui-spinner-is-active', 'true');
+        this._app.loading = true;
         this._app.api.listAll(this._type.module.name, this._type.name, this._limit, this._cursor).then((json)=>{
-           // TODO we would build the list view, and then either replace or append to an existing one
-           // TODO keep track of the cursor
-        }).then(()=>this.setAttribute('ui-spinner-is-active', 'false'));
+            // TODO we would build the list view, and then either replace or append to an existing one
+            // TODO keep track of the cursor
+            const panel = Elements.div().create();
+            const more = json.more;
+            const items = json.data;
+            const fields = json.fields;
+            const count = json.count;
+            if (!count){
+                // TODO Empty / blank slate view
+                panel.innerText = 'no results, add one now';
+
+                return;
+            }
+        }).then(()=>this._app.loading=false);
     }
 }
 window.customElements.define('manage-list-all', ListAllView);
@@ -121,13 +136,7 @@ class CollectionType{
     }
 
     createListView(){
-        const view = Elements.div().create();
-
-        // TODO loading indicator, and async load..
-
-
-
-        return view;
+        return new ListAllView(this._app, this);
     }
 }
 
