@@ -143,7 +143,7 @@ class CollectionType{
 const _APPEND_QUERY_PARAM = (url, name, value)=>{
     if (!value) return url;
     const nv = name + '=' + value;
-    return url.contains('?') ? url + '&' + nv : url + '?' + nv;
+    return url.includes('?') ? url + '&' + nv : url + '?' + nv;
 };
 
 class AppApi{
