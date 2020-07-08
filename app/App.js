@@ -94,8 +94,7 @@ class ListAllView extends HTMLElement{
     refresh(){
         this._app.loading = true;
         this._app.api.listAll(this._type.module.name, this._type.name, this._limit, this._cursor).then((json)=>{
-            // TODO we would build the list view, and then either replace or append to an existing one
-            // TODO keep track of the cursor
+            // TODO build.. forward paging button
             const more = json.more;
             const items = json.data;
             const cursor = json.cursor;
@@ -109,6 +108,7 @@ class ListAllView extends HTMLElement{
             if (more) this._cursor = cursor;
             const panel = Elements.div().create();
             const table = document.createElement('table');
+            panel.appendChild(panel);
             table.appendChild(this._createThead(fields));
             const body = document.createElement('tbody');
             table.appendChild(body);
@@ -122,6 +122,7 @@ class ListAllView extends HTMLElement{
                     tr.appendChild(td);
                 });
             })
+            this.appendChild(panel); // TODO this isn't right... there may be an existing one.
         }).then(()=>this._app.loading=false);
     }
 }
