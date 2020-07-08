@@ -106,8 +106,9 @@ class ListAllView extends HTMLElement{
                 return;
             }
             if (more) this._cursor = cursor;
-            const panel = Elements.div().create();
+            const panel = new UIBox();
             const table = document.createElement('table');
+            table.classList.add('model-table');
             panel.appendChild(table);
             table.appendChild(this._createThead(fields));
             const body = document.createElement('tbody');

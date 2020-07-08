@@ -19,6 +19,23 @@ html{
  // --ide-logo: url(/images/light-logo.svg);
 }
 
+/**
+ * https://css-tricks.com/position-sticky-and-table-headers/
+ * https://css-tricks.com/accessible-simple-responsive-tables/
+ */
+table.model-table{
+  width: 100%;
+  position: relative;
+  border-collapse: collapse;
+  th{
+    position:sticky;
+    top: 0;
+  }
+  tr:nth-child(even) {
+    background: var(--ui-background-secondary);
+  }
+}
+
 //@import "/ide/style/all";
 //@import "/ide/view/all";
 //@import "/ide/create/all";
