@@ -52,7 +52,7 @@ class App extends HTMLElement {
                     const label = Elements.h4().classes('is-small-label').text(type.plural).create();
                     const viewCreator = ()=>{
                         const view = type.createListView();
-                        view.id = type.name;
+                        view.id = type.name + 'ListView';
                         this._views.appendChild(view);
                         return view;
                     };
@@ -74,25 +74,54 @@ class ListAllView extends HTMLElement{
         this._limit = 100;
         this._cursor = null;
     }
+    get paged(){
+        return (this._cursor);
+    }
     connectedCallback(){
         this.refresh();
+    }
+    _createThead(fields){
+        const thead = document.createElement('thead');
+        const tr = document.createElement('tr');
+        thead.appendChild(tr);
+        fields.forEach((field)=>{
+            const th = document.createElement('th');
+            th.innerText = field.label;
+            tr.appendChild(th);
+        });
+        return thead;
     }
     refresh(){
         this._app.loading = true;
         this._app.api.listAll(this._type.module.name, this._type.name, this._limit, this._cursor).then((json)=>{
             // TODO we would build the list view, and then either replace or append to an existing one
             // TODO keep track of the cursor
-            const panel = Elements.div().create();
             const more = json.more;
             const items = json.data;
+            const cursor = json.cursor;
             const fields = json.fields;
             const count = json.count;
-            if (!count){
-                // TODO Empty / blank slate view
-                panel.innerText = 'no results, add one now';
-
+            if (!count && !this.paged){
+                // Blank slate view, only if not paged (TODO)
+                this.innerText = 'no results, add one now';
                 return;
             }
+            if (more) this._cursor = cursor;
+            const panel = Elements.div().create();
+            const table = document.createElement('table');
+            table.appendChild(this._createThead(fields));
+            const body = document.createElement('tbody');
+            table.appendChild(body);
+            items.forEach((item)=>{
+                const tr = document.createElement('tr');
+                body.appendChild(tr);
+                fields.forEach((field)=>{
+                    const td = document.createElement('td');
+                    // TODO formatting..
+                    td.innerText = item[field.name];
+                    tr.appendChild(td);
+                });
+            })
         }).then(()=>this._app.loading=false);
     }
 }
