@@ -157,7 +157,7 @@ class AppApi{
     }
 
     listAll(moduleName, typeName, limit, cursor){
-        let url = this._apiBase + '/modules/' + moduleName + '/' + typeName + '/all';
+        let url = this._apiBase + '/modules/' + moduleName + '/collections/' + typeName + '/all';
         url = _APPEND_QUERY_PARAM(url, 'limit', limit);
         url = _APPEND_QUERY_PARAM(url, 'cursor', cursor);
         return fetch(url).then((response) => response.json());
