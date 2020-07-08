@@ -34,6 +34,7 @@ class App extends HTMLElement {
 
     ready(){
         this._api = new AppApi(this.getAttribute("api-base-href"));
+        this._views = document.getElementById('views');
         this._icons = _ICONS;
 
         const collectionsElement = this.querySelector('#collections');
@@ -41,9 +42,16 @@ class App extends HTMLElement {
             const modules = json.data;
             modules.forEach((module)=>{
                 module.collections.forEach((collection)=>{
-                    const icon = new UIIcon(this.icons.byName(collection.icon.name));
-                    const label = Elements.h4().classes('is-small-label').text(collection.plural).create();
-                    const viewCreator = ()=>{};
+                    const type = new CollectionType(this, collection);
+                    const icon = new UIIcon(type.icon);
+                    const label = Elements.h4().classes('is-small-label').text(type.plural).create();
+                    const viewCreator = ()=>{
+                        const view = Elements.div().create();
+                        view.id = type.name;
+                        view.innerText = type.plural;
+                        this._views.appendChild(view);
+                        return view;
+                    };
                     const tab = new UITab(new UIBar([icon, label]), viewCreator, collection.plural);
                     collectionsElement.appendChild(tab);
                 });
@@ -53,6 +61,25 @@ class App extends HTMLElement {
     }
 }
 window.customElements.define('manage-app', App);
+
+class CollectionType{
+    constructor(app, info) {
+        this._app = app;
+        this._info = info;
+    }
+
+    get name(){
+        return this._info.name;
+    }
+
+    get icon(){
+        return this._app.icons.byName(this._info.icon.name);
+    }
+
+    get plural(){
+        return this._info.plural;
+    }
+}
 
 class AppApi{
     constructor(apiBase) {
