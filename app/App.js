@@ -41,14 +41,14 @@ class App extends HTMLElement {
         this.api.modules().then((json)=>{
             const modules = json.data;
             modules.forEach((module)=>{
+                const moduleType = new ModuleType(this, module);
                 module.collections.forEach((collection)=>{
-                    const type = new CollectionType(this, collection);
+                    const type = new CollectionType(this, moduleType, collection);
                     const icon = new UIIcon(type.icon);
                     const label = Elements.h4().classes('is-small-label').text(type.plural).create();
                     const viewCreator = ()=>{
-                        const view = Elements.div().create();
+                        const view = type.createListView();
                         view.id = type.name;
-                        view.innerText = type.plural;
                         this._views.appendChild(view);
                         return view;
                     };
@@ -57,19 +57,59 @@ class App extends HTMLElement {
                 });
             });
         })
-        .then(()=>this.removeAttribute('ui-is-init'));
+        .then(()=>this.setAttribute('ui-spinner-is-active', 'false'));
     }
 }
 window.customElements.define('manage-app', App);
 
-class CollectionType{
-    constructor(app, info) {
-        this._app = app;
-        this._info = info;
+class ListAllView extends HTMLElement{
+    constructor(app, type) {
+        super();
+        this._type = type;
+        this._limit = 100;
+        this._cursor = null;
+        this.appendChild(new UISpinner().activated());
+    }
+    connectedCallback(){
+        this.refresh();
+    }
+    refresh(){
+        this.setAttribute('ui-spinner-is-active', 'true');
+        this._app.api.listAll(this._type.module.name, this._type.name, this._limit, this._cursor).then((json)=>{
+           // TODO we would build the list view, and then either replace or append to an existing one
+           // TODO keep track of the cursor
+        }).then(()=>this.setAttribute('ui-spinner-is-active', 'false'));
+    }
+}
+window.customElements.define('manage-list-all', ListAllView);
+
+class ModuleType{
+    constructor(app, module) {
+        this._info = module;
     }
 
     get name(){
         return this._info.name;
+    }
+}
+
+class CollectionType{
+    constructor(app, module, info) {
+        this._app = app;
+        this._module = module;
+        this._info = info;
+    }
+
+    get module(){
+        return this._module;
+    }
+
+    get name(){
+        return this._info.name;
+    }
+
+    get label(){
+        return this._info.label;
     }
 
     get icon(){
@@ -79,7 +119,23 @@ class CollectionType{
     get plural(){
         return this._info.plural;
     }
+
+    createListView(){
+        const view = Elements.div().create();
+
+        // TODO loading indicator, and async load..
+
+
+
+        return view;
+    }
 }
+
+const _APPEND_QUERY_PARAM = (url, name, value)=>{
+    if (!value) return url;
+    const nv = name + '=' + value;
+    return url.contains('?') ? url + '&' + nv : url + '?' + nv;
+};
 
 class AppApi{
     constructor(apiBase) {
@@ -91,4 +147,10 @@ class AppApi{
             .then((response) => response.json());
     }
 
+    listAll(moduleName, typeName, limit, cursor){
+        let url = this._apiBase + '/modules/' + moduleName + '/' + typeName + '/all';
+        url = _APPEND_QUERY_PARAM(url, 'limit', limit);
+        url = _APPEND_QUERY_PARAM(url, 'cursor', cursor);
+        return fetch(url).then((response) => response.json());
+    }
 }
