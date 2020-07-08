@@ -94,7 +94,7 @@ class ListAllView extends HTMLElement{
     refresh(){
         this._app.loading = true;
         this._app.api.listAll(this._type.module.name, this._type.name, this._limit, this._cursor).then((json)=>{
-            // TODO build.. forward paging button
+            // TODO build "load more" button as needed.
             const more = json.more;
             const items = json.data;
             const cursor = json.cursor;
@@ -108,7 +108,7 @@ class ListAllView extends HTMLElement{
             if (more) this._cursor = cursor;
             const panel = Elements.div().create();
             const table = document.createElement('table');
-            panel.appendChild(panel);
+            panel.appendChild(table);
             table.appendChild(this._createThead(fields));
             const body = document.createElement('tbody');
             table.appendChild(body);
