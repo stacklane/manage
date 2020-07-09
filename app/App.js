@@ -36,10 +36,30 @@ class App extends HTMLElement {
         this.setAttribute('ui-spinner-is-active', v ? 'true' : 'false');
     }
 
+    nav(hash){
+        // TODO does this fire hashchange?
+        window.location.hash = hash;
+    }
+
+    showRoute(hash){
+        if (!hash) hash = '';
+        if (hash.startsWith('#')) hash = hash.substring(1);
+
+        if (hash === '') {
+            this._views.innerText = 'Home';
+        } else if (hash.startsWith('collections/')){
+            this._views.innerText = hash;
+        } else {
+            this._views.innerText = 'not found';
+        }
+    }
+
     ready(){
         this._api = new AppApi(this.getAttribute("api-base-href"));
         this._views = document.getElementById('views');
         this._icons = _ICONS;
+
+        window.addEventListener('hashchange', ()=>this.showRoute(window.location.hash));
 
         const collectionsElement = this.querySelector('#collections');
         this.api.modules().then((json)=>{
@@ -61,6 +81,7 @@ class App extends HTMLElement {
                 });
             });
         })
+        .then(()=>this.showRoute(window.location.hash))
         .then(()=>this.loading=false);
     }
 }
@@ -115,10 +136,14 @@ class ListAllView extends HTMLElement{
             table.appendChild(body);
             items.forEach((item)=>{
                 const tr = document.createElement('tr');
+                if (item.id){
+                    // TODO actual url
+                    tr.setAttribute('data-href', item.id);
+                }
                 body.appendChild(tr);
                 fields.forEach((field)=>{
                     const td = document.createElement('td');
-                    // TODO formatting..
+                    // TODO formatting and interpretation, probably based on field type
                     td.innerText = item[field.name];
                     tr.appendChild(td);
                 });

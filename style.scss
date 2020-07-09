@@ -27,21 +27,31 @@ table.model-table{
   width: 100%;
   position: relative;
   border-collapse: collapse;
+  thead{
+    font-weight: var(--ui-weight-bold);
+  }
   th{
     position:sticky;
     top: 0;
   }
-  tr:nth-child(even) {
-    background: var(--ui-background-secondary);
+  td{
+    padding: var(--ui-spacing);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  tbody {
+    tr[data-href]{
+      cursor: var(--ui-action-pointer);
+      &:hover, &:active{
+        background: var(--ui-selection-background);
+      }
+    }
+    tr{
+      border-top: 1px solid var(--ui-separator);
+    }
   }
 }
-
-//@import "/ide/style/all";
-//@import "/ide/view/all";
-//@import "/ide/create/all";
-
-
-
 
 
 
