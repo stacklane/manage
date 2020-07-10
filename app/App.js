@@ -60,6 +60,7 @@ class App extends HTMLElement {
 
         return this.api.modules().then((json)=>{
             const modules = json.data;
+            collectionsElement.innerHTML = '';
             modules.forEach((module)=>{
                 const moduleType = new ModuleType(this, module);
                 module.collections.forEach((collection)=>{
