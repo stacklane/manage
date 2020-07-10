@@ -37,32 +37,28 @@ class App extends HTMLElement {
     }
 
     nav(hash){
-        // TODO does this fire hashchange?
-        window.location.hash = hash;
+        window.location.hash = hash; // which in turn fires 'hashchange' event
     }
 
-    showRoute(hash){
+    show(hash){
         if (!hash) hash = '';
         if (hash.startsWith('#')) hash = hash.substring(1);
 
         if (hash === '') {
             this._views.innerText = 'Home';
+            document.title = 'Home';
         } else if (hash.startsWith('collections/')){
             this._views.innerText = hash;
+            document.title = 'bob';
         } else {
             this._views.innerText = 'not found';
         }
     }
 
-    ready(){
-        this._api = new AppApi(this.getAttribute("api-base-href"));
-        this._views = document.getElementById('views');
-        this._icons = _ICONS;
-
-        window.addEventListener('hashchange', ()=>this.showRoute(window.location.hash));
-
+    _loadCollections(){
         const collectionsElement = this.querySelector('#collections');
-        this.api.modules().then((json)=>{
+
+        return this.api.modules().then((json)=>{
             const modules = json.data;
             modules.forEach((module)=>{
                 const moduleType = new ModuleType(this, module);
@@ -77,12 +73,23 @@ class App extends HTMLElement {
                         return view;
                     };
                     const tab = new UITab(new UIBar([icon, label]), viewCreator, collection.plural);
+                    tab.setAttribute('data-collection', collection.name);
                     collectionsElement.appendChild(tab);
                 });
             });
-        })
-        .then(()=>this.showRoute(window.location.hash))
-        .then(()=>this.loading=false);
+        });
+    }
+
+    ready(){
+        this._api = new AppApi(this.getAttribute("api-base-href"));
+        this._views = document.getElementById('views');
+        this._icons = _ICONS;
+
+        window.addEventListener('hashchange', ()=>this.showRoute(window.location.hash));
+
+        this._loadCollections()
+            .then(()=>this.showRoute(window.location.hash))
+            .then(()=>this.loading=false);
     }
 }
 window.customElements.define('manage-app', App);
