@@ -58,9 +58,15 @@ class App extends HTMLElement {
 
         const collectionsElement = this.querySelector('#collections');
 
-        const home = this.querySelector('#home');
+        const homeElements = [];
         const homeIcon = new UIIcon(this.icons.byName('home'));
-        const homeTab = new UITab(new UIBar([homeIcon, "Home"]), home, 'Home');
+        const homeTab = new UITab(new UIBar([homeIcon, "Home"]), ()=>{
+            const home = Elements.div().create();
+            home.id = 'home';
+            homeElements.forEach((e)=>home.appendChild(e));
+            this._views.appendChild(home);
+            return home;
+        }, 'Home');
 
         tabs.push(homeTab);
 
@@ -70,7 +76,8 @@ class App extends HTMLElement {
                 const moduleType = new ModuleType(this, module);
                 module.collections.forEach((collection)=>{
                     const type = new CollectionType(this, moduleType, collection);
-                    home.appendChild(new UIButton([new UIIcon(type.icon), Elements.span().text(type.plural).create()]));
+
+                    homeElements.push(new UIButton([new UIIcon(type.icon), Elements.span().text(type.plural).create()]));
 
                     const icon = new UIIcon(type.icon);
                     const label = Elements.h4().classes('is-small-label').text(type.plural).create();
