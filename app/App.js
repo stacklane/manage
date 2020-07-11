@@ -77,7 +77,7 @@ class App extends HTMLElement {
                 module.collections.forEach((collection)=>{
                     const type = new CollectionType(this, moduleType, collection);
 
-                    homeElements.push(new UIButton([new UIIcon(type.icon), Elements.span().text(type.plural).create()]));
+                    homeElements.push(new UIButton(new UIIcon(type.icon), type.plural));
 
                     const icon = new UIIcon(type.icon);
                     const label = Elements.span().classes('is-small-label').text(type.plural).create();
@@ -108,7 +108,7 @@ class App extends HTMLElement {
         window.addEventListener('hashchange', ()=>this.showRoute(window.location.hash));
 
         this._loadCollections()
-            .then(()=>this.showRoute(window.location.hash))
+            .then(()=>this.show(window.location.hash))
             .then(()=>this.loading=false);
     }
 }
