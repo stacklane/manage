@@ -23,6 +23,12 @@ manage-app{
   position:relative;
 }
 
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  gap: var(--ui-spacing);
+}
+
 /**
  * https://css-tricks.com/position-sticky-and-table-headers/
  * https://css-tricks.com/accessible-simple-responsive-tables/

@@ -43,10 +43,10 @@ class App extends HTMLElement {
         if (hash.startsWith('#')) hash = hash.substring(1);
 
         if (hash === '') {
-            this._views.innerText = 'Home';
+            //this._views.innerText = 'Home';
             document.title = 'Home';
         } else if (hash.startsWith('collections/')){
-            this._views.innerText = hash;
+            //this._views.innerText = hash;
             document.title = 'bob';
         } else {
             this._views.innerText = 'not found';
@@ -62,7 +62,9 @@ class App extends HTMLElement {
         const homeIcon = new UIIcon(this.icons.byName('home'));
         const homeTab = new UITab(new UIBar([homeIcon, "Home"]), ()=>{
             const home = Elements.div().create();
+            home.classList.add('grid');
             home.id = 'home';
+            // TODO some kind of grid
             homeElements.forEach((e)=>home.appendChild(e));
             this._views.appendChild(home);
             return home;
@@ -77,7 +79,9 @@ class App extends HTMLElement {
                 module.collections.forEach((collection)=>{
                     const type = new CollectionType(this, moduleType, collection);
 
-                    homeElements.push(new UIButton(new UIIcon(type.icon), type.plural));
+                    const homeButton = new UIButton(new UIIcon(type.icon), type.plural);
+                    homeButton.classList.add('is-vertical');
+                    homeElements.push(homeButton);
 
                     const icon = new UIIcon(type.icon);
                     const label = Elements.span().classes('is-small-label').text(type.plural).create();
