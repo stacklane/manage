@@ -23,9 +23,13 @@ manage-app{
   position:relative;
 }
 
+#views{
+  padding: var(--ui-spacing);
+}
+
 .grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10em, 15fr));
   gap: var(--ui-spacing);
 }
 
