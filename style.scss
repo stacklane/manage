@@ -27,10 +27,11 @@ manage-app{
   padding: var(--ui-l-spacing);
 }
 
-.grid{
+.tiles{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10em, 10em));
   gap: var(--ui-spacing);
+  --ui-button-spacing: var(--ui-l-spacing);
 }
 
 /**
