@@ -84,7 +84,7 @@ class App extends HTMLElement {
                     homeElements.push(homeButton);
 
                     const icon = new UIIcon(type.icon);
-                    const label = Elements.span().classes('is-small-label').text(type.plural).create();
+                    const label = Elements.span() /*.classes('is-small-label')*/.text(type.plural).create();
                     const viewCreator = ()=>{
                         const view = type.createListView();
                         view.id = type.name + 'ListView';
