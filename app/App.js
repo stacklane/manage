@@ -79,8 +79,7 @@ class App extends HTMLElement {
                 module.collections.forEach((collection)=>{
                     const type = new CollectionType(this, moduleType, collection);
 
-                    const homeButton = new UIButton(new UIIcon(type.icon), type.plural);
-                    homeButton.classList.add('is-vertical');
+                    const homeButton = new UIButton(new UIIcon(type.icon), type.plural).vertical().outlined();
                     homeElements.push(homeButton);
 
                     const icon = new UIIcon(type.icon);
