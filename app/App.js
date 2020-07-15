@@ -79,7 +79,11 @@ class App extends HTMLElement {
                 module.collections.forEach((collection)=>{
                     const type = new CollectionType(this, moduleType, collection);
 
-                    const homeButton = new UIButton(new UIIcon(type.icon), type.plural).vertical().outlined();
+                    const homeButton = new UIButton(new UIIcon(type.icon), type.plural)
+                        .vertical()
+                        .contained()
+                        .even();
+
                     homeElements.push(homeButton);
 
                     const icon = new UIIcon(type.icon);
