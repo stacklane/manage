@@ -27,7 +27,10 @@ manage-app{
 
 }
 
-.tiles{
+/**
+ * Display nested ui-button's as tiles/grid.
+ */
+.button-tiles{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10em, 10em));
   gap: var(--ui-spacing);

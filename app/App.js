@@ -62,9 +62,8 @@ class App extends HTMLElement {
         const homeIcon = new UIIcon(this.icons.byName('home'));
         const homeTab = new UITab(new UIBar([homeIcon, "Home"]), ()=>{
             const home = Elements.div().create();
-            home.classList.add('grid');
+            home.classList.add('button-tiles');
             home.id = 'home';
-            // TODO some kind of grid
             homeElements.forEach((e)=>home.appendChild(e));
             this._views.appendChild(home);
             return home;
