@@ -28,19 +28,20 @@
          api-base-href="/api">
     <ui-drawer-layout>
         <ui-drawer>
-            <ui-box class="is-gutter">
             <ui-appbar>
                 <ui-bar>
-                    <ui-icon>{{{Manage.icon}}}</ui-icon>
+                    <ui-button class="is-round is-contained">
+                        <ui-icon>{{{Manage.icon}}}</ui-icon>
+                        <span class="is-small-label">{{Manage.name}}</span>
+                    </ui-button>
                 </ui-bar>
                 <ui-bar class="is-grow is-end">
-                    <ui-icon-button>
+                    <ui-icon-button class="is-tiny is-round is-contained">
                         <ui-icon data-type="menu-close"></ui-icon>
                         <ui-drawer-closer></ui-drawer-closer>
                     </ui-icon-button>
                 </ui-bar>
             </ui-appbar>
-            </ui-box>
             <ui-box>
                 <ui-sidebar id="collections" class="--ui-tab-is-pill-item --ui-tab-is-wide">
                     <ui-skeletons count="4">
