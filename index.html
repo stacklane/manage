@@ -28,18 +28,19 @@
          api-base-href="/api">
     <ui-drawer-layout>
         <ui-drawer>
-            <ui-box class="has-s-spacing is-gutter">
+            <ui-box class="has-xs-spacing is-gutter">
                 <ui-appbar>
+                    <ui-button class="is-round is-contained is-full-width">
+                        <ui-icon>{{{Manage.icon}}}</ui-icon>
+                        <span>{{Manage.name}}</span>
+                        <ui-button-menu>
+                            <div>
+                                Hi there.
+                            </div>
+                        </ui-button-menu>
+                    </ui-button>
                     <ui-bar class="is-grow">
-                        <ui-button class="is-round is-contained is-full-width">
-                            <ui-icon>{{{Manage.icon}}}</ui-icon>
-                            <span>{{Manage.name}}</span>
-                            <ui-button-menu>
-                                <div>
-                                    Hi there.
-                                </div>
-                            </ui-button-menu>
-                        </ui-button>
+
                     </ui-bar>
                     <!--
                     <ui-bar class="is-grow is-end">
