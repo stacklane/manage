@@ -28,6 +28,10 @@
          api-base-href="/api">
     <ui-drawer-layout>
         <ui-drawer>
+            <ui-icon-button id="drawer-closer" class="is-tiny is-round is-contained">
+                <ui-icon data-type="menu-close"></ui-icon>
+                <ui-drawer-closer></ui-drawer-closer>
+            </ui-icon-button>
             <ui-box class="has-xs-spacing is-gutter">
                 <ui-appbar>
                     <ui-button class="is-round is-contained is-full-width">
@@ -39,14 +43,6 @@
                             </div>
                         </ui-button-menu>
                     </ui-button>
-                    <!--
-                    <ui-bar class="is-grow is-end">
-                        <ui-icon-button class="is-tiny is-round is-contained">
-                            <ui-icon data-type="menu-close"></ui-icon>
-                            <ui-drawer-closer></ui-drawer-closer>
-                        </ui-icon-button>
-                    </ui-bar>
-                    -->
                 </ui-appbar>
             </ui-box>
             <ui-box>
