@@ -33,9 +33,11 @@ ui-button#app-menu{
     font-size: 28px;
   }
   > ui-button-menu{
+    --ui-button-menu-radius: var(--ui-xl-radius);
     // position: absolute;
     min-width: 400px;
     max-width: 600px;
+    min-height: 200px;
     // TODO should be part of ui styles:
     box-shadow: 0 2px 2px rgba(0,0,0,0.02),0 4px 36px 4px rgba(0,0,0,0.1);
     //transition: left var ease, opacity 0.3s ease
