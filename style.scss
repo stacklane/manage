@@ -32,7 +32,7 @@ ui-icon-button#drawer-closer{
   border-top-left-radius: 0px;
   position: absolute;
   right: calc(var(--ui-icon-button-width) * -1);
-  top: 0;
+  bottom: var(--ui-s-spacing); // at bottom for expected minimal use.  typical use is screen sized based.
 }
 
 /**
