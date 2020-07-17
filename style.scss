@@ -27,12 +27,27 @@ manage-app{
 
 }
 
+ui-button#app-menu{
+  height: 56px;
+  > ui-icon{
+    font-size: 28px;
+  }
+  > ui-button-menu{
+    // position: absolute;
+    min-width: 400px;
+    max-width: 600px;
+    // TODO should be part of ui styles:
+    box-shadow: 0 2px 2px rgba(0,0,0,0.02),0 4px 36px 4px rgba(0,0,0,0.1);
+    //transition: left var ease, opacity 0.3s ease
+  }
+}
+
 ui-icon-button#drawer-closer{
   border-bottom-left-radius: 0px;
   border-top-left-radius: 0px;
   position: absolute;
   right: calc(var(--ui-icon-button-width) * -1);
-  bottom: var(--ui-s-spacing); // at bottom for expected minimal use.  typical use is screen sized based.
+  top: var(--ui-s-spacing);
 }
 
 /**
