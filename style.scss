@@ -27,9 +27,11 @@ manage-app{
 
 }
 
-#drawer-closer{
+ui-icon-button#drawer-closer{
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
   position: absolute;
-  right: 0;
+  right: calc(var(--ui-icon-button-width) * -1);
   top: 0;
 }
 
