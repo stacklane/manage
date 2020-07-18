@@ -39,9 +39,20 @@
                         <span>{{Manage.name}}</span>
                         <ui-button-menu class="is-over-parent is-round">
                             <ui-box>
-                            <div>
-                                Hi there.
-                            </div>
+                                <ui-bar>
+                                    <ui-bar>
+                                        <ui-icon>{{{Manage.icon}}}</ui-icon>
+                                        <span>{{Manage.name}}</span>
+                                    </ui-bar>
+                                    <ui-bar class="is-grow is-end">
+                                        {{! Button doesn't need to have an action --
+                                            it will take focus, then blur, closing the menu }}
+                                        <ui-icon-button class="is-tiny"><ui-icon data-type="x"></ui-icon></ui-icon-button>
+                                    </ui-bar>
+                                </ui-bar>
+                                <div>
+                                    ...
+                                </div>
                             </ui-box>
                         </ui-button-menu>
                     </ui-button>
