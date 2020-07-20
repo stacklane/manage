@@ -118,7 +118,7 @@ class App extends HTMLElement {
         //window.addEventListener('hashchange', ()=>this.showRoute(window.location.hash));
 
         this._loadCollections()
-            .then(()=>this.show(window.location.hash))
+            //.then(()=>this.show(window.location.hash))
             .then(()=>this.loading=false);
     }
 }
