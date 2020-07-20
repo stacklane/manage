@@ -38,22 +38,6 @@ class App extends HTMLElement {
         this.setAttribute('ui-spinner-is-active', v ? 'true' : 'false');
     }
 
-    show(hash){
-        if (!hash) hash = '';
-        if (hash.startsWith('#')) hash = hash.substring(1);
-
-        if (hash === '') {
-            //this._views.innerText = 'Home';
-            document.title = 'Home';
-        } else if (hash.startsWith('collections/')){
-            //this._views.innerText = hash;
-            //document.title = 'bob';
-
-        } else {
-            this._views.innerText = 'not found';
-        }
-    }
-
     _loadCollections(){
         const tabs = [];
 
@@ -70,6 +54,7 @@ class App extends HTMLElement {
             return home;
         }, 'Home');
         homeTab.hash = 'home';
+        homeTab.init = true;
 
         tabs.push(homeTab);
 
@@ -118,7 +103,7 @@ class App extends HTMLElement {
         //window.addEventListener('hashchange', ()=>this.showRoute(window.location.hash));
 
         this._loadCollections()
-            //.then(()=>this.show(window.location.hash))
+            .then(()=>UITab.initRouting())
             .then(()=>this.loading=false);
     }
 }
