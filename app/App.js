@@ -79,10 +79,7 @@ class App extends HTMLElement {
                         this._views.appendChild(view);
                         return view;
                     };
-                    const tab = new UITab(new UIBar([icon, label]), viewCreator, collection.plural);
-                    tab.hash = routingHash;
-                    // TBD: tab.setAttribute('data-collection', collection.name);
-
+                    const tab = new UITab(new UIBar([icon, label]), viewCreator, collection.plural).hash(routingHash);
                     tabs.push(tab);
                 });
             });
