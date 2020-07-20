@@ -47,7 +47,8 @@ class App extends HTMLElement {
             document.title = 'Home';
         } else if (hash.startsWith('collections/')){
             //this._views.innerText = hash;
-            document.title = 'bob';
+            //document.title = 'bob';
+
         } else {
             this._views.innerText = 'not found';
         }
@@ -68,6 +69,7 @@ class App extends HTMLElement {
             this._views.appendChild(home);
             return home;
         }, 'Home');
+        homeTab.hash = 'home';
 
         tabs.push(homeTab);
 
@@ -94,7 +96,9 @@ class App extends HTMLElement {
                         return view;
                     };
                     const tab = new UITab(new UIBar([icon, label]), viewCreator, collection.plural);
-                    tab.setAttribute('data-collection', collection.name);
+                    tab.hash = 'collections/' + collection.name;
+                    // TBD: tab.setAttribute('data-collection', collection.name);
+
                     tabs.push(tab);
                 });
             });
@@ -111,7 +115,7 @@ class App extends HTMLElement {
         this._views = document.getElementById('views');
         this._icons = _ICONS;
 
-        window.addEventListener('hashchange', ()=>this.showRoute(window.location.hash));
+        //window.addEventListener('hashchange', ()=>this.showRoute(window.location.hash));
 
         this._loadCollections()
             .then(()=>this.show(window.location.hash))
