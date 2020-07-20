@@ -52,9 +52,7 @@ class App extends HTMLElement {
             homeElements.forEach((e)=>home.appendChild(e));
             this._views.appendChild(home);
             return home;
-        }, 'Home');
-        homeTab.hash = 'home';
-        homeTab.init = true;
+        }, 'Home').hash('home').init(true);
 
         tabs.push(homeTab);
 
@@ -64,11 +62,12 @@ class App extends HTMLElement {
                 const moduleType = new ModuleType(this, module);
                 module.collections.forEach((collection)=>{
                     const type = new CollectionType(this, moduleType, collection);
-
+                    const routingHash = 'collections/' + collection.name;
                     const homeButton = new UIButton(new UIIcon(type.icon), type.plural)
                         .vertical()
                         .contained()
-                        .even();
+                        .even()
+                        .hash(routingHash);
 
                     homeElements.push(homeButton);
 
@@ -81,7 +80,7 @@ class App extends HTMLElement {
                         return view;
                     };
                     const tab = new UITab(new UIBar([icon, label]), viewCreator, collection.plural);
-                    tab.hash = 'collections/' + collection.name;
+                    tab.hash = routingHash;
                     // TBD: tab.setAttribute('data-collection', collection.name);
 
                     tabs.push(tab);
