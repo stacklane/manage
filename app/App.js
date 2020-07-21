@@ -142,7 +142,7 @@ class ListAllView extends HTMLElement{
             if (!count && !this.paged){
                 const action = new UIButton('New ' + this._type.name).contained().primary();
                 const empty = new UIEmpty(
-                    [Elements.h1().child(new UIIcon(this._type.icon)).create(),
+                    [new UIIcon(this._type.icon),
                      Elements.h3().text('No Results').create(),
                      action]
                 );
