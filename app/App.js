@@ -140,8 +140,14 @@ class ListAllView extends HTMLElement{
             const fields = json.fields;
             const count = json.count;
             if (!count && !this.paged){
-                // Blank slate view, only if not paged (TODO)
-                this.innerText = 'no results, add one now';
+                // Blank slate view, **only if not paged** (TODO)
+                const action = new UIButton('New ' + this._type.name);
+                const empty = new UIEmpty(
+                    new UIIcon(this._type.icon),
+                    Elements.h2().text('No Results').create(),
+                    action
+                );
+                this.appendChild(empty);
                 return;
             }
             if (more) this._cursor = cursor;
