@@ -140,8 +140,7 @@ class ListAllView extends HTMLElement{
             const fields = json.fields;
             const count = json.count;
             if (!count && !this.paged){
-                // Blank slate view, **only if not paged** (TODO)
-                const action = new UIButton('New ' + this._type.name);
+                const action = new UIButton('New ' + this._type.name).contained().primary();
                 const empty = new UIEmpty(
                     [Elements.h1().child(new UIIcon(this._type.icon)).create(),
                      Elements.h3().text('No Results').create(),
