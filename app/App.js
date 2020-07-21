@@ -143,9 +143,9 @@ class ListAllView extends HTMLElement{
                 // Blank slate view, **only if not paged** (TODO)
                 const action = new UIButton('New ' + this._type.name);
                 const empty = new UIEmpty(
-                    new UIIcon(this._type.icon),
-                    Elements.h2().text('No Results').create(),
-                    action
+                    [Elements.h1().child(new UIIcon(this._type.icon)).create(),
+                     Elements.h3().text('No Results').create(),
+                     action]
                 );
                 this.appendChild(empty);
                 return;
