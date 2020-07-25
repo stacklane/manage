@@ -165,7 +165,10 @@ class ListAllView extends HTMLElement{
             const fields = json.fields;
             const count = json.count;
             if (!count && !this.paged){
-                const action = new UIButton('New ' + this._type.name).contained().primary();
+                const action = new UIButton('New ' + this._type.label)
+                    .contained()
+                    .primary()
+                    .hash('create/' + this._type.name);
                 const empty = new UIEmpty(
                     [new UIIcon(this._type.icon),
                      Elements.h3().text('No Results').create(),
