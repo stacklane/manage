@@ -106,7 +106,7 @@ class App extends HTMLElement {
         this._views = document.getElementById('views');
         this._icons = _ICONS;
 
-        this._router.add(this.route);
+        this._router.add(()=>this.route);
         this._router.add(UITab.createGlobalRouter());
         this._router.add(UITab.createInitRouter());
 
