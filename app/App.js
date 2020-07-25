@@ -40,9 +40,19 @@ class App extends HTMLElement {
     }
 
     _route(value){
-        if (value == 'hello'){
-            this._views.innerText = 'hello';
-            return true;
+        if (value.startsWith('create/')){
+            const typeName = value.split('/',2);
+            for (let i = 0; i < this._types.length; i++){
+                const type = this._types[i];
+                if (typeName !== type.name) continue;
+                // TODO dialog... icon next to type label..
+                new UIDialog(
+                    Elements.span().text('hi').create(),
+                    'New ' + type.label,
+                    new UIButton('Save').contained().primary()
+                ).open();
+                return true;
+            }
         }
         return false;
     }
@@ -71,6 +81,8 @@ class App extends HTMLElement {
                 const moduleType = new ModuleType(this, module);
                 module.collections.forEach((collection)=>{
                     const type = new CollectionType(this, moduleType, collection);
+                    this._types = type;
+
                     const routingHash = 'collections/' + collection.name;
                     const homeButton = new UIButton(new UIIcon(type.icon), type.plural)
                         .vertical()
@@ -101,6 +113,7 @@ class App extends HTMLElement {
     }
 
     ready(){
+        this._types = [];
         this._api = new AppApi(this.getAttribute("api-base-href"));
         this._views = document.getElementById('views');
         this._icons = _ICONS;
