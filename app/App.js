@@ -24,6 +24,7 @@ const _ICONS = new Icons()
 class App extends HTMLElement {
     constructor() {
         super();
+        this._router = new CompositeRouter();
     }
 
     get api(){
@@ -36,6 +37,14 @@ class App extends HTMLElement {
 
     set loading(v){
         this.setAttribute('ui-spinner-is-active', v ? 'true' : 'false');
+    }
+
+    route(value){
+        if (value == 'hello'){
+            this._views.innerText = 'hello';
+            return true;
+        }
+        return false;
     }
 
     _loadCollections(){
@@ -92,14 +101,17 @@ class App extends HTMLElement {
     }
 
     ready(){
+        this._router = new CompositeRouter().register();
         this._api = new AppApi(this.getAttribute("api-base-href"));
         this._views = document.getElementById('views');
         this._icons = _ICONS;
 
-        //window.addEventListener('hashchange', ()=>this.showRoute(window.location.hash));
+        this._router.add(this.route);
+        this._router.add(UITab.createGlobalRouter());
+        this._router.add(UITab.createInitRouter());
 
         this._loadCollections()
-            .then(()=>UITab.initRouting())
+            .then(()=>this._router.init())
             .then(()=>this.loading=false);
     }
 }
@@ -231,14 +243,33 @@ class AppApi{
     }
 
     modules(){
-        return fetch(this._apiBase + '/modules')
-            .then((response) => response.json());
+        return this._json(fetch(this._apiBase + '/modules'));
+    }
+
+    _json(promise){
+        return promise.then((response)=>response.json());
+    }
+
+    _typeBase(moduleName, typeName){
+        return this._apiBase + '/modules/' + moduleName + '/collections/' + typeName;
     }
 
     listAll(moduleName, typeName, limit, cursor){
-        let url = this._apiBase + '/modules/' + moduleName + '/collections/' + typeName + '/all';
+        let url = this._typeBase(moduleName, typeName) + '/all';
         url = _APPEND_QUERY_PARAM(url, 'limit', limit);
         url = _APPEND_QUERY_PARAM(url, 'cursor', cursor);
-        return fetch(url).then((response) => response.json());
+        return this._json(fetch(url));
+    }
+
+    formForCreate(moduleName, typeName){
+        let url = this._typeBase(moduleName, typeName) + '/forms/create';
+        return this._json(fetch(url));
+    }
+
+    create(moduleName, typeName, form){
+        // TODO form post
+        //let url = this._typeBase(moduleName, typeName) + '/forms/create';
+        //return fetch(url);
+        return null;
     }
 }
