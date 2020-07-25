@@ -39,7 +39,7 @@ class App extends HTMLElement {
         this.setAttribute('ui-spinner-is-active', v ? 'true' : 'false');
     }
 
-    route(value){
+    _route(value){
         if (value == 'hello'){
             this._views.innerText = 'hello';
             return true;
@@ -101,12 +101,12 @@ class App extends HTMLElement {
     }
 
     ready(){
-        this._router = new CompositeRouter().register();
         this._api = new AppApi(this.getAttribute("api-base-href"));
         this._views = document.getElementById('views');
         this._icons = _ICONS;
 
-        this._router.add(()=>this.route);
+        this._router = new CompositeRouter().register();
+        this._router.add((value)=>this._route(value));
         this._router.add(UITab.createGlobalRouter());
         this._router.add(UITab.createInitRouter());
 
