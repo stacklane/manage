@@ -50,7 +50,7 @@ class App extends HTMLElement {
                     Elements.span().text('hi').create(),
                     'New ' + type.label,
                     new UIButton('Save').contained().primary()
-                ).open();
+                ).history().open();
                 return true;
             }
         }
