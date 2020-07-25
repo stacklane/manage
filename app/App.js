@@ -41,7 +41,7 @@ class App extends HTMLElement {
 
     _route(value){
         if (value.startsWith('create/')){
-            const typeName = value.split('/',2);
+            const typeName = value.split('/',2)[1];
             for (let i = 0; i < this._types.length; i++){
                 const type = this._types[i];
                 if (typeName !== type.name) continue;
