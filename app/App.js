@@ -117,15 +117,13 @@ class App extends HTMLElement {
         this._views = document.getElementById('views');
         this._icons = _ICONS;
 
-        // Initialize the UI navigation regardless of further routing:
-        UITab.createInitRouter().handle();
-
         this._router = new Routing().register();
         this._router.add((value)=>this._route(value));
         this._router.add(UITab.createGlobalRouter());
-        //this._router.add(UITab.createInitRouter());
+        this._router.add(UITab.createInitRouter()); // Fallback
 
         this._loadCollections()
+            .then(()=>UITab.createInitRouter().handle()) // Init default UI navigation regardless of further routing.
             .then(()=>this._router.init())
             .then(()=>this.loading=false);
     }
