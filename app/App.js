@@ -118,6 +118,7 @@ class App extends HTMLElement {
         this._icons = _ICONS;
 
         this._router = new Routing().register();
+        this._router.add(UIDialog.createRemovalRouter());
         this._router.add((value)=>this._route(value));
         this._router.add(UITab.createGlobalRouter());
         this._router.add(UITab.createInitRouter()); // Fallback
