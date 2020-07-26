@@ -24,7 +24,6 @@ const _ICONS = new Icons()
 class App extends HTMLElement {
     constructor() {
         super();
-        this._router = new CompositeRouter();
     }
 
     get api(){
