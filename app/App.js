@@ -118,10 +118,13 @@ class App extends HTMLElement {
         this._views = document.getElementById('views');
         this._icons = _ICONS;
 
-        this._router = new CompositeRouter().register();
+        // Initialize the UI navigation regardless of further routing:
+        UITab.createInitRouter().handle();
+
+        this._router = new Routing().register();
         this._router.add((value)=>this._route(value));
         this._router.add(UITab.createGlobalRouter());
-        this._router.add(UITab.createInitRouter());
+        //this._router.add(UITab.createInitRouter());
 
         this._loadCollections()
             .then(()=>this._router.init())
